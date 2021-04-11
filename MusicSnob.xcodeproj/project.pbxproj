@@ -17,6 +17,8 @@
 		20A57D0F262254D600E06AF4 /* MusicSnobUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A57D0E262254D600E06AF4 /* MusicSnobUITests.swift */; };
 		20A57D212622901F00E06AF4 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A57D202622901F00E06AF4 /* EventTableViewCell.swift */; };
 		20A57D26262290A400E06AF4 /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A57D25262290A400E06AF4 /* EventTableViewController.swift */; };
+		20A57D2B2623BB6700E06AF4 /* SearchParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A57D2A2623BB6700E06AF4 /* SearchParams.swift */; };
+		20A57D302623C0B500E06AF4 /* EventSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A57D2F2623C0B500E06AF4 /* EventSchedule.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		20A57D10262254D600E06AF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20A57D202622901F00E06AF4 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		20A57D25262290A400E06AF4 /* EventTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
+		20A57D2A2623BB6700E06AF4 /* SearchParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParams.swift; sourceTree = "<group>"; };
+		20A57D2F2623C0B500E06AF4 /* EventSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSchedule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 				20A57CF5262254D600E06AF4 /* Assets.xcassets */,
 				20A57CF7262254D600E06AF4 /* LaunchScreen.storyboard */,
 				20A57CFA262254D600E06AF4 /* Info.plist */,
+				20A57D2A2623BB6700E06AF4 /* SearchParams.swift */,
+				20A57D2F2623C0B500E06AF4 /* EventSchedule.swift */,
 			);
 			path = MusicSnob;
 			sourceTree = "<group>";
@@ -265,7 +271,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				20A57D212622901F00E06AF4 /* EventTableViewCell.swift in Sources */,
+				20A57D2B2623BB6700E06AF4 /* SearchParams.swift in Sources */,
 				20A57CF1262254D500E06AF4 /* ViewController.swift in Sources */,
+				20A57D302623C0B500E06AF4 /* EventSchedule.swift in Sources */,
 				20A57CED262254D500E06AF4 /* AppDelegate.swift in Sources */,
 				20A57CEF262254D500E06AF4 /* SceneDelegate.swift in Sources */,
 				20A57D26262290A400E06AF4 /* EventTableViewController.swift in Sources */,

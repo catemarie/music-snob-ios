@@ -8,13 +8,10 @@
 import UIKit
 
 class EventTableViewController: UITableViewController {
-
-    var eventList = [String]()
     
+    var eventSchedule = EventSchedule();
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        eventList += ["Andrew Rayel", "Infected Mushroom", "Gareth Emery"]
     }
 
     // MARK: - Table view data source
@@ -24,14 +21,14 @@ class EventTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return eventList.count
+        return eventSchedule.eventList.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventTableViewCell", for: indexPath) as? EventTableViewCell  else {
             fatalError("The dequeued cell is not an instance of EveltTableViewCell.")
         }
-        cell.eventLabel.text = eventList[indexPath.row]
+        cell.eventLabel.text = eventSchedule.eventList[indexPath.row]
         return cell
     }
 
