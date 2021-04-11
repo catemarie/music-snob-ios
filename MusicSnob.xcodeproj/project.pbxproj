@@ -15,6 +15,8 @@
 		20A57CF9262254D600E06AF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20A57CF7262254D600E06AF4 /* LaunchScreen.storyboard */; };
 		20A57D04262254D600E06AF4 /* MusicSnobTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A57D03262254D600E06AF4 /* MusicSnobTests.swift */; };
 		20A57D0F262254D600E06AF4 /* MusicSnobUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A57D0E262254D600E06AF4 /* MusicSnobUITests.swift */; };
+		20A57D212622901F00E06AF4 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A57D202622901F00E06AF4 /* EventTableViewCell.swift */; };
+		20A57D26262290A400E06AF4 /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A57D25262290A400E06AF4 /* EventTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		20A57D0A262254D600E06AF4 /* MusicSnobUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicSnobUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20A57D0E262254D600E06AF4 /* MusicSnobUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSnobUITests.swift; sourceTree = "<group>"; };
 		20A57D10262254D600E06AF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20A57D202622901F00E06AF4 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		20A57D25262290A400E06AF4 /* EventTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,8 @@
 				20A57CEE262254D500E06AF4 /* SceneDelegate.swift */,
 				20A57CF0262254D500E06AF4 /* ViewController.swift */,
 				20A57CF2262254D500E06AF4 /* Main.storyboard */,
+				20A57D25262290A400E06AF4 /* EventTableViewController.swift */,
+				20A57D202622901F00E06AF4 /* EventTableViewCell.swift */,
 				20A57CF5262254D600E06AF4 /* Assets.xcassets */,
 				20A57CF7262254D600E06AF4 /* LaunchScreen.storyboard */,
 				20A57CFA262254D600E06AF4 /* Info.plist */,
@@ -258,9 +264,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20A57D212622901F00E06AF4 /* EventTableViewCell.swift in Sources */,
 				20A57CF1262254D500E06AF4 /* ViewController.swift in Sources */,
 				20A57CED262254D500E06AF4 /* AppDelegate.swift in Sources */,
 				20A57CEF262254D500E06AF4 /* SceneDelegate.swift in Sources */,
+				20A57D26262290A400E06AF4 /* EventTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
