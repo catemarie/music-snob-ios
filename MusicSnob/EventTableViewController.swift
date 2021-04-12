@@ -11,12 +11,13 @@ class EventTableViewController: UITableViewController {
     
     let eventSchedule = EventSchedule();
     var genre = ""
-    var zipcode = ""
+    var city = ""
+    var state = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("User selected genre: " + genre)
-        print("User selected zipcode: " + zipcode)
+        print("User selected location: " + city + ", " + state)
     }
 
     // MARK: - Table view data source

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
@@ -15,7 +16,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var genreData: [String] = [String]()
     var genreSelection = 0
-    var zipcodeSelection = "92104"
+    var citySelection = ""
+    var stateSelection = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,15 +59,33 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         print("Current zip code changed to: " + zipcodeField.text!)
-        zipcodeSelection = zipcodeField.text!
+        getCityStateFromZip(zipcode: zipcodeField.text!)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? EventTableViewController{
             vc.genre = genreData[genreSelection]
-            vc.zipcode = zipcodeSelection
+            vc.city = citySelection
+            vc.state = stateSelection
         }
     }
+    
+    func getCityStateFromZip(zipcode: String) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(zipcode) { [self]
+            (placemarks, error) -> Void in
+            if let placemark = placemarks?[0] {
+                print(placemark.administrativeArea!)
+                print(placemark.subAdministrativeArea!)
+                saveValidLocation(city: placemark.subAdministrativeArea!, state: placemark.administrativeArea!)
+            }
 
+        }
+    }
+    
+    func saveValidLocation(city: String, state: String) {
+        citySelection = city
+        stateSelection = state
+    }
 }
 
