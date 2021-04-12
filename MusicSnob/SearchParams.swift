@@ -12,7 +12,5 @@ class SearchParams {
     var zipcode = ""
     
     init() {
-        genre = "Trance"
-        zipcode = "92104"
     }
 }

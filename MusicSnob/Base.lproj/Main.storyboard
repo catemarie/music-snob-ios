@@ -32,7 +32,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Go"/>
                                 <connections>
-                                    <segue destination="Asx-ty-Yjq" kind="show" id="khz-of-yLb"/>
+                                    <segue destination="Asx-ty-Yjq" kind="show" id="p3d-8k-qW4"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -40,6 +40,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="RAc-gk-n9N"/>
+                    <connections>
+                        <outlet property="goButton" destination="3CO-1Y-cGo" id="8HM-g2-jYQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -9,9 +9,13 @@ import UIKit
 
 class EventTableViewController: UITableViewController {
     
-    var eventSchedule = EventSchedule();
+    let eventSchedule = EventSchedule();
+    let searchParams = SearchParams();
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("User selected genre: " + searchParams.genre)
+        print("User selected zipcode: " + searchParams.zipcode)
     }
 
     // MARK: - Table view data source
@@ -26,7 +30,7 @@ class EventTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventTableViewCell", for: indexPath) as? EventTableViewCell  else {
-            fatalError("The dequeued cell is not an instance of EveltTableViewCell.")
+            fatalError("The dequeued cell is not an instance of EventTableViewCell.")
         }
         cell.eventLabel.text = eventSchedule.eventList[indexPath.row]
         return cell
