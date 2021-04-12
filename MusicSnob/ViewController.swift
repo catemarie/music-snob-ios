@@ -8,6 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var genrePicker: UIPickerView!
+    @IBOutlet weak var zipcodeField: UITextField!
     @IBOutlet weak var goButton: UIButton!
     
     var test: String?
