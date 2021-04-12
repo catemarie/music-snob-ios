@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		203E2A5F262434DC00AB5685 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 203E2A5E262434DC00AB5685 /* ApiKeys.plist */; };
 		20A57CED262254D500E06AF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A57CEC262254D500E06AF4 /* AppDelegate.swift */; };
 		20A57CEF262254D500E06AF4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A57CEE262254D500E06AF4 /* SceneDelegate.swift */; };
 		20A57CF1262254D500E06AF4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A57CF0262254D500E06AF4 /* ViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		203E2A5E262434DC00AB5685 /* ApiKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		20A57CE9262254D500E06AF4 /* MusicSnob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicSnob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20A57CEC262254D500E06AF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20A57CEE262254D500E06AF4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				20A57CFA262254D600E06AF4 /* Info.plist */,
 				20A57D2A2623BB6700E06AF4 /* SearchParams.swift */,
 				20A57D2F2623C0B500E06AF4 /* EventSchedule.swift */,
+				203E2A5E262434DC00AB5685 /* ApiKeys.plist */,
 			);
 			path = MusicSnob;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20A57CF9262254D600E06AF4 /* LaunchScreen.storyboard in Resources */,
+				203E2A5F262434DC00AB5685 /* ApiKeys.plist in Resources */,
 				20A57CF6262254D600E06AF4 /* Assets.xcassets in Resources */,
 				20A57CF4262254D500E06AF4 /* Main.storyboard in Resources */,
 			);

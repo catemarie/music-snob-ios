@@ -16,8 +16,7 @@ class EventTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("User selected genre: " + genre)
-        print("User selected location: " + city + ", " + state)
+        eventSchedule.setSearchParams(genre: genre, city: city, state: state)
     }
 
     // MARK: - Table view data source
