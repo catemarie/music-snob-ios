@@ -10,12 +10,13 @@ import UIKit
 class EventTableViewController: UITableViewController {
     
     let eventSchedule = EventSchedule();
-    let searchParams = SearchParams();
+    var genre = ""
+    var zipcode = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("User selected genre: " + searchParams.genre)
-        print("User selected zipcode: " + searchParams.zipcode)
+        print("User selected genre: " + genre)
+        print("User selected zipcode: " + zipcode)
     }
 
     // MARK: - Table view data source

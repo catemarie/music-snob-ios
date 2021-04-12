@@ -45,20 +45,25 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         genreSelection = row
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        zipcodeField.resignFirstResponder()
-        return true
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text,
+            let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+                return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        return count <= 5
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
         print("Current zip code changed to: " + zipcodeField.text!)
         zipcodeSelection = zipcodeField.text!
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? EventTableViewController{
-            vc.searchParams.genre = genreData[genreSelection]
-            vc.searchParams.zipcode = zipcodeSelection
+            vc.genre = genreData[genreSelection]
+            vc.zipcode = zipcodeSelection
         }
     }
 
