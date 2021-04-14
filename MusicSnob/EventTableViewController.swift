@@ -20,7 +20,7 @@ class EventTableViewController: UITableViewController {
         eventSchedule.getSchedule()
         sleep(5)
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -35,7 +35,9 @@ class EventTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventTableViewCell", for: indexPath) as? EventTableViewCell  else {
             fatalError("The dequeued cell is not an instance of EventTableViewCell.")
         }
-        cell.eventLabel.text = eventSchedule.eventList[indexPath.row]
+        cell.dateLabel.text = eventSchedule.eventList[indexPath.row].date
+        cell.artistLabel.text = eventSchedule.eventList[indexPath.row].artist
+        cell.venueLabel.text = eventSchedule.eventList[indexPath.row].venue
         return cell
     }
     
