@@ -17,7 +17,8 @@ class EventTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         eventSchedule.setSearchParams(genre: genre, city: city, state: state)
-        eventSchedule.getLocationId()
+        eventSchedule.getSchedule()
+        sleep(5)
     }
 
     // MARK: - Table view data source
@@ -37,7 +38,11 @@ class EventTableViewController: UITableViewController {
         cell.eventLabel.text = eventSchedule.eventList[indexPath.row]
         return cell
     }
-
+    
+    func updateScheduleTable() {
+        tableView.reloadData()
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

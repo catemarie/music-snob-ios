@@ -48,7 +48,6 @@ class EventSchedule {
     var KEY = ""
     
     init() {
-        eventList += ["Andrew Rayel", "Infected Mushroom", "Gareth Emery"]
         var dictRoot: NSDictionary?
         if let path = Bundle.main.path(forResource: "ApiKeys", ofType: "plist") {
             dictRoot = NSDictionary(contentsOfFile: path)
@@ -73,22 +72,8 @@ class EventSchedule {
         print("User selected genre: " + genre)
         print("User selected location: " + cityTemp + ", " + stateTemp)
     }
-    
-    func buildSchedule(events: Array<Event>) {
-        for event in events {
-            if (!event.livestreamInd && !event.festivalInd) {
-                print(event.date)
-                
-                print("    " + event.venue.name)
-                
-                for artist in event.artistList {
-                    print("        " + artist.name)
-                }
-            }
-        }
-    }
 
-    func getArtistList(locationId: Int) {
+    func getEventsForLocation(locationId: Int) {
         let url = URL(string: "https://edmtrain.com/api/events?locationIds=" + String(locationId) + "&client=" + KEY)
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
             
@@ -96,12 +81,22 @@ class EventSchedule {
             // print(String(data: data, encoding: .utf8)!)
             
             let events: Events = try! JSONDecoder().decode(Events.self, from: data)
-            self.buildSchedule(events: events.data)
+            for event in events.data {
+                if (!event.livestreamInd && !event.festivalInd) {
+                    print(event.date)
+                    print("    " + event.venue.name)
+                    
+                    for artist in event.artistList {
+                        print("        " + artist.name)
+                        self.eventList.append(artist.name)
+                    }
+                }
+            }
         }
         task.resume()
     }
 
-    func getLocationId () {
+    func getLocationData () {
         let url = URL(string: "https://edmtrain.com/api/locations?state=" + state + "&city=" + city + "&client=" + KEY)
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
             
@@ -109,13 +104,13 @@ class EventSchedule {
             // print(String(data: data, encoding: .utf8)!)
             
             let location: Locations = try! JSONDecoder().decode(Locations.self, from: data)
-            self.getArtistList(locationId: location.data[0].id)
+            self.getEventsForLocation(locationId: location.data[0].id)
         }
         task.resume()
     }
     
     public func getSchedule() {
-        getLocationId()
+        getLocationData()
     }
     
 }
