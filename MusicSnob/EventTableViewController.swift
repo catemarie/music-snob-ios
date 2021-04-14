@@ -16,9 +16,12 @@ class EventTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var retrievedData = false
+        eventSchedule.setUpdateHandler(handler: { () in retrievedData = true})
         eventSchedule.setSearchParams(genre: genre, city: city, state: state)
-        eventSchedule.getSchedule()
-        sleep(5)
+        while(!retrievedData) {
+            sleep(1)
+        }
     }
     
     // MARK: - Table view data source
@@ -39,10 +42,6 @@ class EventTableViewController: UITableViewController {
         cell.artistLabel.text = eventSchedule.eventList[indexPath.row].artist
         cell.venueLabel.text = eventSchedule.eventList[indexPath.row].venue
         return cell
-    }
-    
-    func updateScheduleTable() {
-        tableView.reloadData()
     }
     
     /*

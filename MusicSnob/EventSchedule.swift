@@ -9,6 +9,8 @@ import Foundation
 
 class EventSchedule {
     
+    typealias CompletionHandler = () -> Void
+    
     struct EventEntry {
         var date: String
         var artist: String
@@ -45,13 +47,14 @@ class EventSchedule {
         var data: Array<Event>
     }
     
-    var state = "California"
-    var city = "San%20Diego"
+    var locationId = 0
 
     var statesDictionary = ["NM": "New Mexico", "SD": "South Dakota", "TN": "Tennessee", "VT": "Vermont", "WY": "Wyoming", "OR": "Oregon", "MI": "Michigan", "MS": "Mississippi", "WA": "Washington", "ID": "Idaho", "ND": "North Dakota", "GA": "Georgia", "UT": "Utah", "OH": "Ohio", "DE": "Delaware", "NC": "North Carolina", "NJ": "New Jersey", "IN": "Indiana", "IL": "Illinois", "HI": "Hawaii", "NH": "New Hampshire", "MO": "Missouri", "MD": "Maryland", "WV": "West Virginia", "MA": "Massachusetts", "IA": "Iowa", "KY": "Kentucky", "NE": "Nebraska", "SC": "South Carolina", "AZ": "Arizona", "KS": "Kansas", "NV": "Nevada", "WI": "Wisconsin", "RI": "Rhode Island", "FL": "Florida", "TX": "Texas", "AL": "Alabama", "CO": "Colorado", "AK": "Alaska", "VA": "Virginia", "AR": "Arkansas", "CA": "California", "LA": "Louisiana", "CT": "Connecticut", "NY": "New York", "MN": "Minnesota", "MT": "Montana", "OK": "Oklahoma", "PA": "Pennsylvania", "ME": "Maine"]
     
     var eventList = [EventEntry]()
     var KEY = ""
+    
+    var updateHandler: CompletionHandler
     
     init() {
         var dictRoot: NSDictionary?
@@ -66,6 +69,11 @@ class EventSchedule {
         else {
             print("Did not find an EDM Train client API key")
         }
+        updateHandler = {}
+    }
+    
+    func setUpdateHandler(handler: @escaping CompletionHandler) {
+        updateHandler = handler
     }
     
     func getStateName(abv: String) -> String {
@@ -73,18 +81,19 @@ class EventSchedule {
     }
     
     func setSearchParams(genre: String, city: String, state: String) {
-        let stateTemp = getStateName(abv: state)
+        let stateTemp = getStateName(abv: state).replacingOccurrences(of: " ", with: "%20")
         let cityTemp = city.replacingOccurrences(of: " ", with: "%20")
         print("User selected genre: " + genre)
         print("User selected location: " + cityTemp + ", " + stateTemp)
+        setLocation(city: cityTemp, state: stateTemp)
     }
 
-    func getEventsForLocation(locationId: Int) {
+    func getEventsForLocation() {
         let url = URL(string: "https://edmtrain.com/api/events?locationIds=" + String(locationId) + "&client=" + KEY)
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
             
             guard let data = data else { return }
-            // print(String(data: data, encoding: .utf8)!)
+            print(String(data: data, encoding: .utf8)!)
             
             let events: Events = try! JSONDecoder().decode(Events.self, from: data)
             for event in events.data {
@@ -96,29 +105,26 @@ class EventSchedule {
                         print("        " + artist.name)
                         let newEventEntry = EventEntry(date: event.date, artist: artist.name, venue: event.venue.name)
                         self.eventList.append(newEventEntry)
-                        
                     }
                 }
             }
+            self.updateHandler()
         }
         task.resume()
     }
 
-    func getLocationData () {
+    func setLocation (city: String, state: String) {
         let url = URL(string: "https://edmtrain.com/api/locations?state=" + state + "&city=" + city + "&client=" + KEY)
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
             
             guard let data = data else { return }
-            // print(String(data: data, encoding: .utf8)!)
+            print(String(data: data, encoding: .utf8)!)
             
             let location: Locations = try! JSONDecoder().decode(Locations.self, from: data)
-            self.getEventsForLocation(locationId: location.data[0].id)
+            self.locationId = location.data[0].id
+            print("Set location ID: " + String(self.locationId))
+            self.getEventsForLocation()
         }
         task.resume()
     }
-    
-    public func getSchedule() {
-        getLocationData()
-    }
-    
 }
