@@ -16,8 +16,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var genreData: [String] = [String]()
     var genreSelection = 0
-    var citySelection = ""
-    var stateSelection = ""
+    var citySelection = "San Diego"
+    var stateSelection = "CA"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,15 +75,28 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         geocoder.geocodeAddressString(zipcode) { [self]
             (placemarks, error) -> Void in
             if let placemark = placemarks?[0] {
-                print(placemark.administrativeArea!)
-                print(placemark.subAdministrativeArea!)
-                saveValidLocation(city: placemark.subAdministrativeArea!, state: placemark.administrativeArea!)
+                if (placemark.isoCountryCode == "US") {
+                    print(placemark.administrativeArea ?? "bad state name")
+                    print(placemark.subAdministrativeArea ?? "bad city name")
+                    saveValidLocation(city: placemark.subAdministrativeArea!, state: placemark.administrativeArea!)
+                    zipcodeField.layer.borderWidth = 0.0
+                }
+                else {
+                    zipcodeField.layer.borderColor = UIColor.red.cgColor
+                    zipcodeField.layer.borderWidth = 1.0
+                    print("Got non-US postal code")
+                }
             }
-
+            else {
+                zipcodeField.layer.borderColor = UIColor.red.cgColor
+                zipcodeField.layer.borderWidth = 1.0
+                print("Did not find a place with this zip code")
+            }
         }
     }
     
     func saveValidLocation(city: String, state: String) {
+        print("Save the valid location")
         citySelection = city
         stateSelection = state
     }
