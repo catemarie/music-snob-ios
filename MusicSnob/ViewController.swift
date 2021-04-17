@@ -27,7 +27,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         self.zipcodeField.delegate = self
 
-        genreData = ["House", "Trance"]
+        genreData = ["EDM"]
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
