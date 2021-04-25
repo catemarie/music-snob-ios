@@ -48,6 +48,7 @@ class EventSchedule {
     }
     
     var locationId = 0
+    var genreSelection = ""
 
     var statesDictionary = ["NM": "New Mexico", "SD": "South Dakota", "TN": "Tennessee", "VT": "Vermont", "WY": "Wyoming", "OR": "Oregon", "MI": "Michigan", "MS": "Mississippi", "WA": "Washington", "ID": "Idaho", "ND": "North Dakota", "GA": "Georgia", "UT": "Utah", "OH": "Ohio", "DE": "Delaware", "NC": "North Carolina", "NJ": "New Jersey", "IN": "Indiana", "IL": "Illinois", "HI": "Hawaii", "NH": "New Hampshire", "MO": "Missouri", "MD": "Maryland", "WV": "West Virginia", "MA": "Massachusetts", "IA": "Iowa", "KY": "Kentucky", "NE": "Nebraska", "SC": "South Carolina", "AZ": "Arizona", "KS": "Kansas", "NV": "Nevada", "WI": "Wisconsin", "RI": "Rhode Island", "FL": "Florida", "TX": "Texas", "AL": "Alabama", "CO": "Colorado", "AK": "Alaska", "VA": "Virginia", "AR": "Arkansas", "CA": "California", "LA": "Louisiana", "CT": "Connecticut", "NY": "New York", "MN": "Minnesota", "MT": "Montana", "OK": "Oklahoma", "PA": "Pennsylvania", "ME": "Maine"]
     
@@ -85,12 +86,39 @@ class EventSchedule {
         let cityTemp = city.replacingOccurrences(of: " ", with: "%20")
         print("User selected genre: " + genre)
         print("User selected location: " + cityTemp + ", " + stateTemp)
+        setGenereSelection(genre: genre)
         setLocation(city: cityTemp, state: stateTemp)
     }
 
+    func filterEvents(entry: EventEntry) {
+        let artist = entry.artist.replacingOccurrences(of: " ", with: "%20")
+        print(artist)
+        
+        let url = URL(string: "http://127.0.0.1:5000/api/genres/lookup?name=" + String(artist))
+        let task = URLSession.shared.dataTask(with: url!) { [self](data, response, error) in
+            guard let data = data else { return }
+            print(String(data: data, encoding: .utf8)!)
+            
+            let genres: Array<String> = try! JSONDecoder().decode(Array<String>.self, from: data)
+            print(genreSelection)
+            if genreSelection == "" {
+                self.eventList.append(entry)
+            }
+            else {
+                for g in genres {
+                    if g.contains(self.genreSelection) {
+                        self.eventList.append(entry)
+                        break
+                    }
+                }
+            }
+        }
+        task.resume()
+    }
+    
     func getEventsForLocation() {
         let url = URL(string: "https://edmtrain.com/api/events?locationIds=" + String(locationId) + "&client=" + KEY)
-        let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
+        let task = URLSession.shared.dataTask(with: url!) { [self](data, response, error) in
             
             guard let data = data else { return }
             print(String(data: data, encoding: .utf8)!)
@@ -104,7 +132,7 @@ class EventSchedule {
                     for artist in event.artistList {
                         print("        " + artist.name)
                         let newEventEntry = EventEntry(date: event.date, artist: artist.name, venue: event.venue.name)
-                        self.eventList.append(newEventEntry)
+                        self.filterEvents(entry: newEventEntry)
                     }
                 }
             }
@@ -126,5 +154,9 @@ class EventSchedule {
             self.getEventsForLocation()
         }
         task.resume()
+    }
+    
+    func setGenereSelection (genre: String) {
+        self.genreSelection = genre
     }
 }

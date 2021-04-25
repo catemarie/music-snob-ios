@@ -15,7 +15,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var goButton: UIButton!
     
     var genreData: [String] = [String]()
-    var genreSelection = 0
+    var genreSelection = "house"
     var citySelection = "San Diego"
     var stateSelection = "CA"
     
@@ -27,7 +27,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         self.zipcodeField.delegate = self
 
-        genreData = ["EDM"]
+        genreData = ["house", "trance"]
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -44,7 +44,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("Current genre selection changed to: " + genreData[row])
-        genreSelection = row
+        genreSelection = genreData[row]
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -64,7 +64,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? EventTableViewController{
-            vc.genre = genreData[genreSelection]
+            vc.genre = genreSelection
             vc.city = citySelection
             vc.state = stateSelection
         }
