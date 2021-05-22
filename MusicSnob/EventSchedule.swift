@@ -95,25 +95,27 @@ class EventSchedule {
         print(artist)
         
         let url = URL(string: "http://127.0.0.1:5000/api/genres/lookup?name=" + String(artist))
-        let task = URLSession.shared.dataTask(with: url!) { [self](data, response, error) in
-            guard let data = data else { return }
-            print(String(data: data, encoding: .utf8)!)
-            
-            let genres: Array<String> = try! JSONDecoder().decode(Array<String>.self, from: data)
-            print(genreSelection)
-            if genreSelection == "" {
-                self.eventList.append(entry)
-            }
-            else {
-                for g in genres {
-                    if g.contains(self.genreSelection) {
-                        self.eventList.append(entry)
-                        break
+        if url != nil {
+            let task = URLSession.shared.dataTask(with: url!) { [self](data, response, error) in
+                guard let data = data else { return }
+                print(String(data: data, encoding: .utf8)!)
+                
+                let genres: Array<String> = try! JSONDecoder().decode(Array<String>.self, from: data)
+                print(genreSelection)
+                if genreSelection == "" {
+                    self.eventList.append(entry)
+                }
+                else {
+                    for g in genres {
+                        if g.contains(self.genreSelection) {
+                            self.eventList.append(entry)
+                            break
+                        }
                     }
                 }
             }
+            task.resume()
         }
-        task.resume()
     }
     
     func getEventsForLocation() {

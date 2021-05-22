@@ -24,10 +24,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         self.genrePicker.delegate = self
         self.genrePicker.dataSource = self
-        
         self.zipcodeField.delegate = self
 
         genreData = ["house", "trance"]
+        
+        zipcodeField.layer.borderColor = UIColor.green.cgColor
+        zipcodeField.layer.borderWidth = 1.0
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -54,12 +56,17 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         let substringToReplace = textFieldText[rangeOfTextToReplace]
         let count = textFieldText.count - substringToReplace.count + string.count
+        if count < 5 {
+            zipcodeField.layer.borderColor = UIColor.red.cgColor
+        }
         return count <= 5
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         print("Current zip code changed to: " + zipcodeField.text!)
-        getCityStateFromZip(zipcode: zipcodeField.text!)
+        if (zipcodeField.text?.count == 5) {
+            getCityStateFromZip(zipcode: zipcodeField.text!)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -79,17 +86,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                     print(placemark.administrativeArea ?? "bad state name")
                     print(placemark.subAdministrativeArea ?? "bad city name")
                     saveValidLocation(city: placemark.subAdministrativeArea!, state: placemark.administrativeArea!)
-                    zipcodeField.layer.borderWidth = 0.0
+                    zipcodeField.layer.borderColor = UIColor.green.cgColor
                 }
                 else {
                     zipcodeField.layer.borderColor = UIColor.red.cgColor
-                    zipcodeField.layer.borderWidth = 1.0
                     print("Got non-US postal code")
                 }
             }
             else {
                 zipcodeField.layer.borderColor = UIColor.red.cgColor
-                zipcodeField.layer.borderWidth = 1.0
                 print("Did not find a place with this zip code")
             }
         }
